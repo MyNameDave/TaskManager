@@ -1,0 +1,13 @@
+body {
+    max-width: 1000px;
+    margin: auto;
+}
+
+h2 {
+    font-size: 1.8em;
+}
+
+th {
+    font-size: 1.2em;
+    font-weight: bold;
+}

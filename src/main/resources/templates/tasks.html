@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>Tasks | TaskManager</title>
+</head>
+<body>
+    <main>
+        <div th:if="${tasksList} != null">
+            <ul th:each="task: ${tasksList}">
+                <li th:text="${task}"></li>
+            </ul>
+        </div>
+        <div th:if="${tasksList} == null">
+            <p>No tasks left to do!</p>
+        </div>
+    </main>
+</body>
+</html>

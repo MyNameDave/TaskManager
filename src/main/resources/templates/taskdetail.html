@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>Task Details | TaskManager</title>
+</head>
+<body>
+<main>
+    <h2>Task detail</h2>
+    <div th:if="${task} != null" class="detailGrid">
+        <table>
+            <th>Main Task</th>
+            <th></th>
+            <tr>
+                <td><p>Title: </p></td>
+                <td><p th:text="${task.title}"></p></td>
+            </tr>
+            <tr>
+                <td><p>Description: </p></td>
+                <td><p th:text="${task.description}"></p></td>
+            </tr>
+            <tr>
+                <td><p>Due date: </p></td>
+                <td><p th:text="${task.dueDateText}"></p></td>
+            </tr>
+        </table>
+        <br>
+        <div th:if="${task.subtasks} != null">
+            <h3>Sub Tasks</h3>
+            <table th:each="subtask: ${task.subtasks}">
+                <th th:text="${subtask.title}"></th>
+                <th></th>
+                <tr>
+                    <td><p>Description: </p></td>
+                    <td><p th:text="${subtask.description}"></p></td>
+                </tr>
+            </table>
+        </div>
+        <div th:if="${task.subtasks} == null">
+            <p>There are no subtasks!</p>
+        </div>
+
+    </div>
+    <div th:if="${task} == null">
+        <p>Task not found!</p>
+    </div>
+</main>
+</body>
+</html>
