@@ -66,7 +66,7 @@ public class Task {
         this.description = description;
     }
 
-    private String getDueDateText() {
+    public String getDueDateText() {
         if (dueDate.getHour() >= 12) return dueDate.getMonth().getDisplayName(TextStyle.FULL, Locale.US) + " " + dueDate.getDayOfMonth() + " " + dueDate.getYear() + " at " + (dueDate.getHour() % 12) + " pm";
         else return dueDate.getMonth().getDisplayName(TextStyle.FULL, Locale.US) + " " + dueDate.getDayOfMonth() + " " + dueDate.getYear() + " at " + (dueDate.getHour() % 12) + " am";
     }

@@ -39,7 +39,8 @@ public class TaskController {
 
     @GetMapping("/tasks/{id}")
     public String showTask(Model model, @PathVariable(value = "id") String id) {
-        model.addAttribute("task", taskService.getTask(Long.parseLong(id)));
+        Long lid = Long.parseLong(id);
+        model.addAttribute("task", taskService.getTask(lid));
         return "taskdetail";
     }
 
@@ -64,7 +65,8 @@ public class TaskController {
         if (bindingResult.hasErrors()){
             return "editTask";
         }
-        taskService.getTask(lid).setTask(task);
+        System.out.println(lid);
+        taskService.updateTask(lid, task);
         return "redirect:/tasks/" + lid;
     }
 
@@ -74,6 +76,7 @@ public class TaskController {
         model.addAttribute("task", taskService.getTask(lid));
         model.addAttribute("taskDTO", new TaskDTO());
         if (taskService.getTask(lid) != null) {
+            System.out.println(lid);
             return "editTask";
         }
         return "redirect:/tasks";

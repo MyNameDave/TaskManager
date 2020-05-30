@@ -27,20 +27,6 @@
             </tr>
         </table>
         <br>
-        <div th:if="${task.subtasks} != null">
-            <h3>Sub Tasks</h3>
-            <table th:each="subtask: ${task.subtasks}">
-                <th th:text="${subtask.title}"></th>
-                <th></th>
-                <tr>
-                    <td><p>Description: </p></td>
-                    <td><p th:text="${subtask.description}"></p></td>
-                </tr>
-            </table>
-        </div>
-        <div th:if="${task.subtasks} == null">
-            <p>There are no subtasks!</p>
-        </div>
 
     </div>
     <div th:if="${task} == null">

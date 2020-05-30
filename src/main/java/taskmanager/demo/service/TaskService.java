@@ -11,4 +11,6 @@ public interface TaskService {
     Task getTask(Long id);
 
     void addTask(TaskDTO task);
+
+    void  updateTask(Long id, TaskDTO newTask);
 }

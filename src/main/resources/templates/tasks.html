@@ -8,6 +8,7 @@
 </head>
 <body>
     <main>
+        <h2>Tasks</h2>
         <div th:if="${tasksList} != null">
             <ul th:each="task: ${tasksList}">
                 <li th:text="${task}"></li>

@@ -47,4 +47,11 @@ public class TaskServicelmpl implements TaskService {
         task.setDueDate(taskDTO.getDueDate());
         repository.save(task);
     }
+
+    @Override
+    public void updateTask(Long id, TaskDTO newTask) {
+        System.out.println(getTask(id).getTextFormat());
+        getTask(id).setTask(newTask);
+        System.out.println(getTask(id).getTextFormat());
+    }
 }

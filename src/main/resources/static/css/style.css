@@ -11,3 +11,13 @@ th {
     font-size: 1.2em;
     font-weight: bold;
 }
+
+main div {
+    margin-top: 50px;
+}
+
+li {
+    list-style-type: circle;
+    padding: 15px 0;
+    border-bottom: 1px solid black;
+}
