@@ -40,6 +40,20 @@ public class TaskServicelmpl implements TaskService {
     }
 
     @Override
+    public TaskDTO getTaskDTO(Long id) {
+        for (Task t : repository.findAll()) {
+            if (t.getId().equals(id)){
+                TaskDTO dto = new TaskDTO();
+                dto.setTitle(t.getTitle());
+                dto.setDescription(t.getDescription());
+                dto.setDueDate(t.getDueDate());
+                return dto;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public void addTask(TaskDTO taskDTO) {
         Task task = new Task();
         task.setTitle(taskDTO.getTitle());
@@ -50,8 +64,8 @@ public class TaskServicelmpl implements TaskService {
 
     @Override
     public void updateTask(Long id, TaskDTO newTask) {
-        System.out.println(getTask(id).getTextFormat());
-        getTask(id).setTask(newTask);
-        System.out.println(getTask(id).getTextFormat());
+        Task task = getTask(id);
+        task.setTask(newTask);
+        repository.save(task);
     }
 }

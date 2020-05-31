@@ -7,24 +7,25 @@
     <title>New Task | TaskManager</title>
 </head>
 <body>
+<header th:replace="header.html"></header>
 <main>
-    <h2>New Task</h2>
+    <h2 th:text="#{newTask}"></h2>
     <form method="post" action="/add" th:object="${taskDTO}">
         <p th:text="${#fields.globalErrors()}"></p>
         <div>
-            <label for="title">Title:</label>
+            <label for="title" th:text="#{title}"></label>
             <input type="text" th:field="*{title}">
             <p th:errors="*{title}"></p>
         </div>
         <div>
-            <label for="description">Description:</label>
+            <label for="description" th:text="#{description}">Description:</label>
             <input type="text" th:field="*{description}">
         </div>
         <div>
-            <label for="dueDate">Due date:</label>
+            <label for="dueDate"  th:text="#{date}"></label>
             <input type="datetime-local" th:field="*{dueDate}">
         </div>
-        <input type="submit" value="Submit">
+        <input type="submit" th:field="action" th:text="#{submit}">
     </form>
 </main>
 </body>

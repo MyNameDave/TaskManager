@@ -40,7 +40,12 @@ public class TaskController {
     @GetMapping("/tasks/{id}")
     public String showTask(Model model, @PathVariable(value = "id") String id) {
         Long lid = Long.parseLong(id);
-        model.addAttribute("task", taskService.getTask(lid));
+        model.addAttribute("task", taskService.getTaskDTO(lid));
+        if (subTaskService.getSubTasksFromIdMainTask(lid).size() == 0) {
+            model.addAttribute("subtasks", null);
+        } else {
+            model.addAttribute("subtasks", subTaskService.getSubTasksFromIdMainTask(lid));
+        }
         return "taskdetail";
     }
 
@@ -65,7 +70,6 @@ public class TaskController {
         if (bindingResult.hasErrors()){
             return "editTask";
         }
-        System.out.println(lid);
         taskService.updateTask(lid, task);
         return "redirect:/tasks/" + lid;
     }
@@ -73,10 +77,11 @@ public class TaskController {
     @GetMapping("/tasks/edit/{id}")
     public String edit(Model model, @PathVariable(value = "id") String id){
         Long lid = Long.parseLong(id);
-        model.addAttribute("task", taskService.getTask(lid));
-        model.addAttribute("taskDTO", new TaskDTO());
         if (taskService.getTask(lid) != null) {
-            System.out.println(lid);
+            model.addAttribute("id", lid);
+            TaskDTO taskDTO = new TaskDTO();
+            taskDTO.setTaskDTO(taskService.getTask(lid));
+            model.addAttribute("taskDTO", taskDTO);
             return "editTask";
         }
         return "redirect:/tasks";
@@ -85,21 +90,23 @@ public class TaskController {
     @GetMapping("/tasks/{id}/sub/create")
     public String createSubTask(Model model, @PathVariable(value = "id") String id){
         Long lid = Long.parseLong(id);
-        model.addAttribute("task", taskService.getTask(lid));
-        model.addAttribute("subtask", new SubTaskDTO());
         if (taskService.getTask(lid) != null) {
+            SubTaskDTO subTaskDTO = new SubTaskDTO();
+            subTaskDTO.setIdMainTask(lid);
+            model.addAttribute("subtask", subTaskDTO);
+            model.addAttribute("title", taskService.getTask(lid).getTitle());
             return "newSubTask";
         }
         return "redirect:tasks";
     }
 
     @PostMapping("/addSub")
-    public String addSubTask(@ModelAttribute @Valid SubTaskDTO subtask, @RequestParam(value = "taskId") String id, BindingResult bindingResult){
+    public String addSubTask(@ModelAttribute @Valid SubTaskDTO subtask, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
+            System.out.println("Some error");
             return "newSubTask";
         }
-        subtask.setIdMainTask(Long.parseLong(id));
         subTaskService.addSubTask(subtask);
-        return "redirect:/tasks/" + id;
+        return "redirect:/tasks/" + subtask.getIdMainTask();
     }
 }

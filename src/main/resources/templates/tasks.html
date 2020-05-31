@@ -7,15 +7,16 @@
     <title>Tasks | TaskManager</title>
 </head>
 <body>
+<header th:replace="header.html"></header>
     <main>
-        <h2>Tasks</h2>
+        <h2 th:text="#{tasks}"></h2>
         <div th:if="${tasksList} != null">
             <ul th:each="task: ${tasksList}">
                 <li th:text="${task}"></li>
             </ul>
         </div>
         <div th:if="${tasksList} == null">
-            <p>No tasks left to do!</p>
+            <p th:text="#{noTasks}"></p>
         </div>
     </main>
 </body>

@@ -7,27 +7,28 @@
     <title>Edit Task | TaskManager</title>
 </head>
 <body>
+<header th:replace="header.html"></header>
 <main>
-    <h2>edit Task</h2>
+    <h2 th:text="#{editTask}"></h2>
     <form  method="post" action="/tasks/edit" th:object="${taskDTO}">
         <p th:text="${#fields.globalErrors()}"></p>
         <div>
-            <input type="hidden" th:name="id" th:value="${task.id}">
+            <input type="hidden" th:name="id" th:value="${id}">
         </div>
         <div>
-            <label for="title">Title:</label>
+            <label for="title" th:text="#{title}"></label>
             <input type="text" th:field="*{title}">
             <p th:errors="*{title}"></p>
         </div>
         <div>
-            <label for="description">Description:</label>
+            <label for="description" th:text="#{description}"></label>
             <input type="text" th:field="*{description}">
         </div>
         <div>
-            <label for="dueDate">Due date:</label>
+            <label for="dueDate" th:text="#{date}"></label>
             <input type="datetime-local" th:field="*{dueDate}">
         </div>
-        <input type="submit" value="Submit">
+        <input type="submit" th:field="action" th:text="#{submit}">
     </form>
 </main>
 </body>

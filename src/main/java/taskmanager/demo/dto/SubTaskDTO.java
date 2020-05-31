@@ -1,6 +1,7 @@
 package taskmanager.demo.dto;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class SubTaskDTO {
@@ -8,7 +9,7 @@ public class SubTaskDTO {
     @Size(min = 2)
     private String title;
 
-    @NotEmpty
+    @NotNull
     private Long idMainTask;
 
     private String description;

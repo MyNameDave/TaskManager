@@ -7,30 +7,44 @@
     <title>Task Details | TaskManager</title>
 </head>
 <body>
+<header th:replace="header.html"></header>
 <main>
-    <h2>Task detail</h2>
+    <h2 th:text="#{detail}"></h2>
     <div th:if="${task} != null" class="detailGrid">
         <table>
-            <th>Main Task</th>
+            <th th:text="#{mainTask}"</th>
             <th></th>
             <tr>
-                <td><p>Title: </p></td>
+                <td><p th:text="#{title}"></p></td>
                 <td><p th:text="${task.title}"></p></td>
             </tr>
             <tr>
-                <td><p>Description: </p></td>
+                <td><p th:text="#{description}"></p></td>
                 <td><p th:text="${task.description}"></p></td>
             </tr>
             <tr>
-                <td><p>Due date: </p></td>
+                <td><p th:text="#{date}"></p></td>
                 <td><p th:text="${task.dueDateText}"></p></td>
             </tr>
         </table>
         <br>
-
+        <div th:if="${subtasks} != null">
+            <h3 th:text="#{subTasks}"></h3>
+            <table th:each="subtask: ${subtasks}">
+                <th th:text="${subtask.title}"></th>
+                <th></th>
+                <tr>
+                    <td><p th:text="#{description}"></p></td>
+                    <td><p th:text="${subtask.description}"></p></td>
+                </tr>
+            </table>
+        </div>
+        <div th:if="${subtasks} == null">
+            <p th:text="#{noSubTasks}"></p>
+        </div>
     </div>
     <div th:if="${task} == null">
-        <p>Task not found!</p>
+        <p th:text="taskNotFound"></p>
     </div>
 </main>
 </body>

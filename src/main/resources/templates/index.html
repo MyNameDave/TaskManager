@@ -7,9 +7,6 @@
     <title>Home | TaskManager</title>
 </head>
 <body>
-    <main>
-        <a th:href="@{~/tasks}">Tasks</a>
-        <a th:href="@{~/tasks/new}">New Task</a>
-    </main>
+    <header th:replace="header.html"></header>
 </body>
 </html>
